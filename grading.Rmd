@@ -1,0 +1,57 @@
+---
+title: "Grading candidates exams using BCStats"
+author: "Axel Schneider"
+date: "2024-03-25"
+---
+
+
+```{r setup r studio, include=FALSE}
+
+rm(list=ls()) 
+
+libraries <- c("dplyr", "bcstatsR", "readxl")
+lapply(libraries, library, character.only = TRUE)
+
+setwd('C:/Users/schb1/Documents/Logri/Kenema/Delivery/training/exams/grading')
+
+```
+
+```{r load data}
+
+correct_answers <- read_excel("correct_answers.xlsx")
+submissions <- read_excel("submissions.xlsx")
+
+```
+
+```{r prepare correct data for bcstats}
+
+n_submissions <- nrow(submissions)
+correct_answers <- rep(1, n_submissions) 
+
+```
+
+```{r variables to check}
+
+exam_questions <- c()
+
+```
+
+```{r run bcstats}
+
+result <- bcstats(surveydata  = submissions,
+                  bcdata      = correct_answers,
+                  id          = "id",
+                  t1vars      = exam_questions,
+                  t2vars      = "",
+                  t3vars      = "",
+                  enumerator  = "name",
+                  enumteam    = "",
+                  backchecker = "")
+
+```
+
+```{r display exam results}
+
+
+```
+
